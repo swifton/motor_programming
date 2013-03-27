@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>  
   <head>  
     <title>Motor Programming</title>  
@@ -25,13 +26,17 @@
 		<div class="content">
 			<canvas id='cv'></canvas>			
 			<span id="button-one">
-				<a href="#" onclick="pauseGame()" title="click me">Pause</a>
+				<a href="#" onclick="startProgram()" title="click me">Start</a>
 			</span>
 			<span id="button-one">
-				<a href="#" onclick="newGame()" title="click me">New game</a>
+				<a href="#" onclick="stopProgram()" title="click me">Stop</a>
 			</span>
 		</div>
 	</div>
+
+	<div id = "program"></div>	
+
+
 	<script src="general.js"></script> 
  	<script src="click.js"></script>  
 	<script src="game.js"></script>  

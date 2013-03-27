@@ -1,0 +1,62 @@
+var gLoop;
+
+function draw() {
+   
+}
+
+function startProgram() {
+   console.log(program);
+}
+
+function stopProgram() {
+
+}
+
+function GameLoop() {
+   clear();
+   draw();
+
+   gLoop = setTimeout(GameLoop, 1000 / 200);
+}
+
+var program = new Array(7);
+
+function init() {
+  // var body = getElementById("body");
+   var select = document.createElement("select");
+   select.setAttribute("id","1");
+   
+   var option;
+   option = document.createElement("option");
+   option.setAttribute("value", "move");
+   select.appendChild(option);
+
+}
+
+init();
+//GameLoop();
+
+//c.addEventListener('mousedown', clickReporter, false);
+
+ /* create select */
+   2: var select = document.createElement("select");
+   3: select.setAttribute("name", "mySelect");
+   4: select.setAttribute("id", "mySelect");
+   5: select.style.width = "300px";
+   6:  
+   7: /* setting an onchange event */
+   8: selectNode.onchange = function() {dbrOptionChange()};
+   9:  
+  10: var option;
+  11:  
+  12: /* we are going to add two options */
+  13: /* create options elements */
+  14: option = document.createElement("option");
+  15: option.setAttribute("value", "Connection.TRANSACTION_NONE");
+  16: option.innerHTML = "Connection.TRANSACTION_NONE";
+  17: select.appendChild(option);
+  18:  
+  19: option = document.createElement("option");
+  20: option.setAttribute("value", "Connection.TRANSACTION_READ_COMMITTED");
+  21: option.innerHTML = "Connection.TRANSACTION_READ_COMMITTED";
+  22: select.appendChild(option);
