@@ -29,6 +29,12 @@ function drawLine(x1, y1, x2, y2) {
 //	ctx.drawImage(img, 0, 0); 
 //	ctx.restore();
 }
+
+function drawimage(x, y, source) {
+	var img = new Image();
+	img.src = "images/" + source + ".png";
+	ctx.drawImage(img, x, y); 
+}
 	
 function clear() {
 	ctx.fillStyle = '#ffffff';
