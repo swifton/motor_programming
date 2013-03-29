@@ -10,8 +10,8 @@ function reset(data){
 }
 
 var gamePaused = true;
-var speed = 1000/3;
-
+var speed = 1000/(3 * frames);
+ 
 function pauseGame() {
   if (!gamePaused) {
     gLoop = clearTimeout(gLoop);

@@ -11,6 +11,8 @@ function loadBoard(level) {
    character = level.character[0].slice(0);
    character[0] -= 1;
    character[1] -= 1;
+   oldPosition = character.slice(0);
+   drawpos = character.slice(0);
    direction = level.character[1].slice(0);
    grainsTotal = level.totalGrains;
    for (i in level.grains) board[level.grains[i][0] - 1][level.grains[i][1] - 1] = 1;
@@ -30,26 +32,8 @@ function copyBugs(b) {
    return ans;
 }
 
-function draw() {
-//   drawCircle(character[0] * diameter + diameter/2, character[1] * diameter + diameter/2, diameter/2);
-   drawimage(character[0] * diameter, character[1] * diameter, "character");
-	rad = diameter/2;
-	for (i = 0; i < width; i++) {
-		for (j = 0; j < height; j++) {
-			if (board[i][j] == 1) drawimage(i*2*rad, j*2*rad, "apple");
-//drawRectangle(i*2*rad + 1, j*2*rad + 1, 2*rad - 2, 2*rad - 2);
-			if (board[i][j] == 2)  drawimage(i*2*rad, j*2*rad, "wall");
-
-//drawRectangle(i*2*rad + 1, j*2*rad + 1, 1*rad - 2, 1*rad - 2);
-		}
-	}
-   for (i in bugs) {
-//      drawCircle(bugs[i][0][0] * diameter + diameter/2, bugs[i][0][1] * diameter + diameter/2, diameter/3);
-      drawimage(bugs[i][0][0] * diameter, bugs[i][0][1] * diameter, "bug");
-   }
-}
-
 function startProgram() {
+   frame = 0;
    var select;
    var option;
    for (var i = 0; i < 7; i++) {
@@ -71,32 +55,6 @@ function stopProgram() {
 
    clear();
    draw();
-}
-
-function checkWalls(x, y) {
-   if (x < 0 || y < 0) return true;
-   if (x > width - 1 || y > height - 1) return true;
-   if (board[x][y] == 2) return true;
-}
-
-function checkGrains(x, y) {
-   if (board[x][y] == 1) return true;
-}
-
-function checkCharacter(x, y) {
-   if (character[0] == x && character[1] == y) {
-      bugShock(1);
-      return true;
-   }
-}
-
-function checkBugs(x, y) {
-   for (i in bugs) {
-      if (x == bugs[i][0][0] && y == bugs[i][0][1]) {
-         bugShock(0);
-         return true;
-      }
-   }
 }
 
 function checkWin() {
@@ -130,52 +88,26 @@ function moveBugs() {
    }
 }
 
-
-
-function execute() {
-   var command = program[step];
-   step += 1;
-   moveBugs();
-   if (shocked > 0) {
-      shocked -= 1;
-      return;
-   }
-
-   switch (command) {
-      case "Wait":
-         break;
-      case "Move":
-         var x = character[0] + direction[0];
-         var y = character[1] + direction[1];
-         if (checkWalls(x, y)) break;
-         if (checkBugs(x, y)) break;
-         character[0] = x;
-         character[1] = y;
-         break;
-      case "Turn Left":
-         var tmp = direction[0];
-         direction[0] = direction[1];
-         direction[1] = -tmp;
-         break;
-      case "Turn Right":
-         var tmp = direction[0];
-         direction[0] = -direction[1];
-         direction[1] = tmp;
-         break;
-      case "Pick Up":
-         if (board[character[0]][character[1]] == 1) { 
-            board[character[0]][character[1]] = 0; 
-            grainsLeft -= 1;
-            checkWin();
-         }
-         break;
-   }
+function directionToAngle(direction) {
+   var angle = 0;
+   if (direction[0] == -1) angle = -Math.PI/2;
+   if (direction[0] == 1) angle = Math.PI/2;
+   if (direction[1] == -1) angle = 0;
+   if (direction[1] == 1) angle = Math.PI;
+   return angle;
 }
 
-
 function GameLoop() {
+   frame += 1;
+   if (frame == frames) {
+      frame = 0;
+      oldPosition = character.slice(0);
+      execute();
+   }
+   
+   drawpos[0] = (character[0] * frame + oldPosition[0] * (frames - frame))/frames;
+   drawpos[1] = (character[1] * frame + oldPosition[1] * (frames - frame))/frames;
    clear();
-   execute();
    draw();
 
    gLoop = setTimeout(GameLoop, speed);
@@ -203,7 +135,6 @@ function init() {
    }
 }
 
-init();
 
 var width, height;
 
@@ -219,6 +150,14 @@ var bugs = [];
 
 var levelNumber = 0;
 
+var frame = 0;
+
+var oldPosition = new Array(2);
+
+var drawpos = new Array(2);
+
 loadBoard(level1);
 
+clear();
 draw();
+init();
