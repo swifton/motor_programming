@@ -9,15 +9,16 @@ function checkGrains(x, y) {
 }
 
 function checkCharacter(x, y) {
-   if (character[0] == x && character[1] == y) {
+   if (character.coordinates[0] == x && character.coordinates[1] == y) {
       bugShock(1);
       return true;
    }
 }
 
 function checkBugs(x, y) {
+	var bug;
    for (i in bugs) {
-      if (x == bugs[i][0][0] && y == bugs[i][0][1]) {
+      if (x == bugs[i].coordinates[0] && y == bugs[i].coordinates[1]) {
          bugShock(0);
          return true;
       }

@@ -43,6 +43,27 @@ function clear() {
 	ctx.fill();
 }
 
+function drawPositions() {
+   character.drawPosition[0] = (character.coordinates[0] * frame + character.oldCoordinates[0] * (frames - frame))/frames;
+   character.drawPosition[1] = (character.coordinates[1] * frame + character.oldCoordinates[1] * (frames - frame))/frames;
+	character.drawAngle = (character.angle * frame + character.oldAngle * (frames - frame))/frames;
+
+	for (i in bugs) {
+   	bugs[i].drawPosition[0] = (bugs[i].coordinates[0] * frame + bugs[i].oldCoordinates[0] * (frames - frame))/frames;
+   	bugs[i].drawPosition[1] = (bugs[i].coordinates[1] * frame + bugs[i].oldCoordinates[1] * (frames - frame))/frames;
+		bugs[i].drawAngle = (bugs[i].angle * frame + bugs[i].oldAngle * (frames - frame))/frames;
+	}
+}
+
+function oldState() {
+   character.oldCoordinates = character.coordinates.slice(0);
+   character.oldAngle = character.angle;
+	for (i in bugs) {
+   	bugs[i].oldCoordinates = bugs[i].coordinates.slice(0);
+   	bugs[i].oldAngle = bugs[i].angle;
+	}
+}
+
 function draw() {
 	rad = diameter/2;
 	for (i = 0; i < width; i++) {
@@ -52,8 +73,8 @@ function draw() {
 		}
 	}
    for (i in bugs) {
-      drawimage(bugs[i][0][0] * diameter, bugs[i][0][1] * diameter, "bug", directionToAngle(bugs[i][1]));
+      drawimage(bugs[i].drawPosition[0] * diameter, bugs[i].drawPosition[1] * diameter, "bug", bugs[i].drawAngle);
    }
-   drawimage(drawpos[0] * diameter, drawpos[1] * diameter, "character", directionToAngle(direction));
+   drawimage(character.drawPosition[0] * diameter, character.drawPosition[1] * diameter, "character", character.drawAngle);
 }
 

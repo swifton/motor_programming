@@ -11,28 +11,28 @@ function execute() {
       case "Wait":
          break;
       case "Move":
-         var x = character[0] + direction[0];
-         var y = character[1] + direction[1];
+         var x = character.coordinates[0] + character.direction[0];
+         var y = character.coordinates[1] + character.direction[1];
          if (checkWalls(x, y)) break;
          if (checkBugs(x, y)) break;
-         oldPosition[0] = character[0];
-         oldPosition[1] = character[1];
-         character[0] = x;
-         character[1] = y;
+         character.coordinates[0] = x;
+         character.coordinates[1] = y;
          break;
       case "Turn Left":
-         var tmp = direction[0];
-         direction[0] = direction[1];
-         direction[1] = -tmp;
+         var tmp = character.direction[0];
+         character.direction[0] = character.direction[1];
+         character.direction[1] = -tmp;
+	 changeAngle();
          break;
       case "Turn Right":
-         var tmp = direction[0];
-         direction[0] = -direction[1];
-         direction[1] = tmp;
+         var tmp = character.direction[0];
+         character.direction[0] = -character.direction[1];
+         character.direction[1] = tmp;
+	 changeAngle();
          break;
       case "Pick Up":
-         if (board[character[0]][character[1]] == 1) { 
-            board[character[0]][character[1]] = 0; 
+         if (board[character.coordinates[0]][character.coordinates[1]] == 1) { 
+            board[character.coordinates[0]][character.coordinates[1]] = 0; 
             grainsLeft -= 1;
             checkWin();
          }
@@ -40,3 +40,9 @@ function execute() {
    }
 }
 
+function changeAngle() {
+   character.angle = directionToAngle(character.direction);
+   var an = character.oldAngle - character.angle;
+   if (an > Math.PI) character.oldAngle -= 2 * Math.PI;
+   if (an < -Math.PI) character.oldAngle += 2 * Math.PI;
+}
