@@ -65,10 +65,10 @@ function oldState() {
 }
 
 function backlight(step, color) {
-   select = document.getElementById("program" + "select" + String(step));
+   select = document.getElementById("program1" + "select" + String(step));
    select.setAttribute("class", color);
    if (step > 0) {
-      select = document.getElementById("program" + "select" + String(step-1));
+      select = document.getElementById("program1" + "select" + String(step-1));
       select.setAttribute("class", "white");
    }
 }

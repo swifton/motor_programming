@@ -3,7 +3,6 @@ function execute() {
    step += 1;
    moveBugs();
    backlight(step-1, "green");
-
    if (shocked > 0) {
       shocked -= 1;
       return;

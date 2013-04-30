@@ -19,6 +19,8 @@ function loadBoard(level) {
 		bugs.push(bugCopied);
 	}
    shocked = 0;
+   draw();
+   resetProgram();
 }
 
 function startProgram() {
@@ -26,7 +28,7 @@ function startProgram() {
    var select;
    var option;
    for (var i = 0; i < 7; i++) {
-      select = document.getElementById(String(i));
+      select = document.getElementById("programselect" + String(i));
       option = select.options[select.selectedIndex].value;
       program[i] = option;
    }
@@ -37,22 +39,36 @@ function startProgram() {
 }
 
 function stopProgram() {
-   gLoop = clearTimeout(gLoop);
+   if (step>0) backlight(step - 1, "white");
+   step = 0;
+
    gamePaused = true;
    if (levelNumber == 6) levelNumber = 0;
    loadBoard(levels[levelNumber]);
+   
+
 
    clear();
    draw();
 }
 
 function checkWin() {
-   if (grainsLeft == 0) levelNumber += 1;
+   if (grainsLeft == 0) {
+      levelNumber += 1;
+   }
 }
 
 function nextLevel() {
    levelNumber += 1;
    stopProgram();
+   resetProgram();
+}
+
+function resetProgram() {
+   for (i = 0; i < 7; i++) {
+      select = document.getElementById("program" + "select" + String(i));
+      select.value = "Wait";
+   }
 }
 
 
@@ -92,20 +108,26 @@ function GameLoop() {
 	clear();
    draw();
 
+
    gLoop = setTimeout(GameLoop, speed);
-   if (step == 7) {stopProgram()}
+
+   if (step == 7) {
+      setTimeout(function() {stopProgram()},1000);
+      gLoop = clearTimeout(gLoop);
+   }
 }
 
 var program = new Array(7);
+var sub1 = new Array(7);
 
-function init() {
+function init(program) {
    var select;
    var option;
    var options = ["Wait", "Move", "Turn Left", "Turn Right", "Pick Up"];
 
    for (var i = 0; i < 7; i++) {
       select = document.createElement("select");
-      select.setAttribute("id", String(i));
+      select.setAttribute("id", program + "select" + String(i));
    
       for (j in options) {
          option = document.createElement("option");
@@ -113,7 +135,7 @@ function init() {
          option.text = options[j];
          select.appendChild(option);
       }
-      document.getElementById("program").appendChild(select);
+      document.getElementById(program).appendChild(select);
    }
 }
 
@@ -130,8 +152,11 @@ var bugs = [];
 var levelNumber = 0;
 var frame = 0;
 
+init("program");
+init("sub1");
+
 loadBoard(level1);
 
 clear();
 draw();
-init();
+setTimeout(draw, 500)

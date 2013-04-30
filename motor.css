@@ -1,0 +1,45 @@
+#page-wrap{
+	width:636px;
+	margin:0px auto 0;
+	padding:10px;
+}
+
+.content{
+	position:absolute;
+	left:10px;
+	top:20px;
+
+	width:230px;
+	margin:0 auto;
+	padding:15px 30px;
+	background:#fff;
+	float:left;
+}
+
+a{
+	text-decoration:none;
+}	
+
+#program{
+	position:absolute;
+	left:400px;
+	top:20px;
+	width:100px;
+}
+
+#sub1{
+	position:absolute;
+	left:520px;
+	top:20px;
+	width:100px;
+}
+
+.green{
+	background:#0f0
+}
+
+.buttons{
+	position:fixed;
+	left:40px;
+	top:250px;
+}
