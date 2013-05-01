@@ -1,0 +1,6 @@
+character = new creature([2, 1], [0, 1]);
+grains = [[0, 1], [1, 1], [3, 1], [4, 1], [2, 2], [2, 3]];
+var level19 = new level(grains, 5, 5, character, 1);
+level19.walls = [[1, 0], [3, 0], [1, 2], [3, 2]];
+bug0 = new creature([2, 4], [1, 0]);
+level19.bugs = [bug0]

@@ -20,6 +20,8 @@ function loadBoard(level) {
 	}
    shocked = 0;
    draw();
+   cn = document.getElementById('canvas');
+   cn.innerHTML = 'Level' + String(levelNumber + 1);
 }
 
 function startProgram() {
@@ -48,7 +50,7 @@ function startProgram() {
 }
 
 function stopProgram(time) {
-   if (step>0) setTimeout(function() {backlight(step - 1, "white", 0); step = 0;}, time);
+   if (step>0) setTimeout(function() {backlight(step - 1, "white", 0); step = 0; if (executing == 1) backlight(substep-1, "white", 1); substep = 0;}, time);
    if (!gamePaused) pauseGame();
 
    setTimeout(function() {loadBoard(levels[levelNumber])},time);
@@ -65,14 +67,22 @@ function checkWin() {
 
 function nextLevel(time) {
    levelNumber += 1;
-   if (levelNumber == 7) levelNumber = 0;
+   if (levelNumber == levels.length) levelNumber = 0;
    stopProgram(time);
    setTimeout(function() {resetProgram()}, time);
+}
+
+function previousLevel() {
+   levelNumber -= 1
+   if (levelNumber == -1) levelNumber = levels.length - 1;
+   stopProgram(0);
 }
 
 function resetProgram() {
    for (i = 0; i < 7; i++) {
       select = document.getElementById("program" + "select" + String(i));
+      select.value = "Wait";
+      select = document.getElementById("sub1" + "select" + String(i));
       select.value = "Wait";
    }
 }

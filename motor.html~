@@ -20,7 +20,9 @@
   </head>  
   <body> 
 	<div id="page-wrap" class="clearfix">  
-		<div class="content">
+		<div class="content" >
+			<div id="levelNumber">Level1</div>
+			<br>
 			<canvas id='c'></canvas>
 		</div>
 		<div class="buttons">	
@@ -31,7 +33,10 @@
 				<a href="#" onclick="stopProgram(1000)" title="click me">Stop</a>
 			</span>
 			<span id="button-one">
-				<a href="#" onclick="nextLevel()" title="click me">Next Level</a>
+				<a href="#" onclick="nextLevel(0)" title="click me">Next Level</a>
+			</span>
+			<span id="button-one">
+				<a href="#" onclick="previousLevel()" title="click me">Previous Level</a>
 			</span>
 		</div>
 	</div>

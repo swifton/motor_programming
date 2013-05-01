@@ -1,24 +1,34 @@
 def array_to_file(arr, filee):
    filee.write('[')
+   c1 = 0
+   c2 = 0
    for i in arr:
-      if (arr.index(i)>0):
+      if (c1>0):
          filee.write(', ')
       filee.write('[')
+      c2 = 0
+      c1 += 1
       for j in i:
-         if (i.index(j)>0):
+         if (c2>0):
             filee.write(', ')
+         c2 += 1
          filee.write(str(j))
       filee.write(']')
    filee.write(']')
 
 def creature_to_file(arr, filee):
+   c1 = 0
+   c2 = 0
    for i in arr:
-      if (arr.index(i)>0):
+      if (c1>0):
          filee.write(', ')
       filee.write('[')
+      c2 = 0
+      c1 += 1
       for j in i:
-         if (i.index(j)>0):
+         if (c2>0):
             filee.write(', ')
+         c2 += 1
          filee.write(str(j))
       filee.write(']')
 
@@ -96,12 +106,16 @@ for bug in bugs:
    g.write('bug%i = new creature(' %i)
    creature_to_file(bug, g)
    g.write(');\n')
+   i+=1
 
 g.write('level'  + str(nOfLevel) + '.bugs = [')
 
 i = 0
 for bug in bugs:
+   if (i>0):
+      g.write(', ')
    g.write('bug%i' %i)
+   i+=1
 
 g.write(']\n')
 
