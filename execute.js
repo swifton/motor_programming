@@ -1,8 +1,13 @@
-function execute() {
-   var command = program[step];
-   step += 1;
+function execute(program) {
+   var command;
+   var localStep;
+   if (executing == 0) localStep = step;
+   if (executing == 1) localStep = substep;
+   command = program[localStep];
+   if (executing == 0) step += 1;
+   if (executing == 1) substep += 1;
    moveBugs();
-   backlight(step-1, "green");
+   backlight(localStep, "green", executing);
 
    if (shocked > 0) {
       shocked -= 1;
@@ -36,8 +41,9 @@ function execute() {
          if (board[character.coordinates[0]][character.coordinates[1]] == 1) { 
             board[character.coordinates[0]][character.coordinates[1]] = 0; 
             grainsLeft -= 1;
-            checkWin();
          }
+      case "Sub 1":
+         executing = 1;
          break;
    }
 }

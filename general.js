@@ -64,11 +64,13 @@ function oldState() {
 	}
 }
 
-function backlight(step, color) {
-   select = document.getElementById("program" + "select" + String(step));
+function backlight(step, color, execc) {
+   if (execc == 0) prog = "program";
+   if (execc == 1) prog = "sub1";
+   select = document.getElementById(prog + "select" + String(step));
    select.setAttribute("class", color);
    if (step > 0) {
-      select = document.getElementById("program" + "select" + String(step-1));
+      select = document.getElementById(prog + "select" + String(step-1));
       select.setAttribute("class", "white");
    }
 }

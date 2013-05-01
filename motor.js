@@ -20,10 +20,10 @@ function loadBoard(level) {
 	}
    shocked = 0;
    draw();
-   resetProgram();
 }
 
 function startProgram() {
+   if (!gamePaused) return;
    frame = 0;
    var select;
    var option;
@@ -32,21 +32,28 @@ function startProgram() {
       option = select.options[select.selectedIndex].value;
       program[i] = option;
    }
+
+   for (var i = 0; i < 7; i++) {
+      select = document.getElementById("sub1select" + String(i));
+      option = select.options[select.selectedIndex].value;
+      sub1[i] = option;
+   }
    
-   if (gamePaused) pauseGame();
+   executing = 0;
+   pauseGame();
    step = 0;
+   substep = 0;
    grainsLeft = grainsTotal;
+
 }
 
-function stopProgram() {
-   if (step>0) backlight(step - 1, "white");
+function stopProgram(time) {
+   if (step>0) setTimeout(function() {backlight(6, "white", 0)}, 1000/3);
    step = 0;
 
-   gamePaused = true;
+   if (!gamePaused) pauseGame();
    if (levelNumber == 6) levelNumber = 0;
-   loadBoard(levels[levelNumber]);
-   
-
+   setTimeout(function() {loadBoard(levels[levelNumber])},time);
 
    clear();
    draw();
@@ -54,14 +61,14 @@ function stopProgram() {
 
 function checkWin() {
    if (grainsLeft == 0) {
-      levelNumber += 1;
+      nextLevel(1000);
    }
 }
 
-function nextLevel() {
+function nextLevel(time) {
    levelNumber += 1;
-   stopProgram();
-   resetProgram();
+   stopProgram(time);
+   setTimeout(function() {resetProgram()}, time);
 }
 
 function resetProgram() {
@@ -101,7 +108,13 @@ function GameLoop() {
    if (frame == frames) {
 		oldState();
       frame = 0;
-      execute();
+      if (executing == 0) {
+         execute(program);
+      }
+      if (executing == 1) {
+         execute(sub1);
+
+      }
    }
    
 	drawPositions();
@@ -111,9 +124,15 @@ function GameLoop() {
 
    gLoop = setTimeout(GameLoop, speed);
 
-   if (step == 7) {
-      setTimeout(function() {stopProgram()},1000);
-      gLoop = clearTimeout(gLoop);
+   if (substep == 7) {
+      setTimeout(function() {backlight(6, "white", 1)}, 1000/3);
+      executing = 0;
+      substep = 0;
+   }
+   if (step == 7 && executing == 0) {
+
+      stopProgram(1000);
+      checkWin();
    }
 }
 
@@ -124,6 +143,7 @@ function init(program) {
    var select;
    var option;
    var options = ["Wait", "Move", "Turn Left", "Turn Right", "Pick Up"];
+   if (program == "program") options.push("Sub 1");
 
    for (var i = 0; i < 7; i++) {
       select = document.createElement("select");
@@ -145,6 +165,8 @@ var board = new Array();
 
 var character;
 var step;
+var substep;
+var executing;
 var shocked = 0;
 
 var bugs = [];
