@@ -1,0 +1,4 @@
+character = new creature([[a,], ]);
+grains = [];
+var level1 = new level(grains, 4, 0, character, 1);
+level1.walls = []

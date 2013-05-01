@@ -10,8 +10,8 @@ function loadBoard(level) {
    c.height = height * diameter;
    character = copyCreature(level.character);
    grainsTotal = level.totalGrains;
-   for (i in level.grains) board[level.grains[i][0] - 1][level.grains[i][1] - 1] = 1;
-   for (i in level.walls) board[level.walls[i][0] - 1][level.walls[i][1] - 1] = 2;
+   for (i in level.grains) board[level.grains[i][0]][level.grains[i][1]] = 1;
+   for (i in level.walls) board[level.walls[i][0]][level.walls[i][1]] = 2;
 	bugs = [];
 	for (i in level.bugs) {
 		bugToCopy = level.bugs[i];
@@ -48,11 +48,9 @@ function startProgram() {
 }
 
 function stopProgram(time) {
-   if (step>0) setTimeout(function() {backlight(6, "white", 0)}, 1000/3);
-   step = 0;
-
+   if (step>0) setTimeout(function() {backlight(step - 1, "white", 0); step = 0;}, time);
    if (!gamePaused) pauseGame();
-   if (levelNumber == 6) levelNumber = 0;
+
    setTimeout(function() {loadBoard(levels[levelNumber])},time);
 
    clear();
@@ -67,6 +65,7 @@ function checkWin() {
 
 function nextLevel(time) {
    levelNumber += 1;
+   if (levelNumber == 7) levelNumber = 0;
    stopProgram(time);
    setTimeout(function() {resetProgram()}, time);
 }
@@ -177,7 +176,7 @@ var frame = 0;
 init("program");
 init("sub1");
 
-loadBoard(level1);
+loadBoard(levels[levelNumber]);
 
 clear();
 draw();

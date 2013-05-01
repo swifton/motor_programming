@@ -42,6 +42,7 @@ function execute(program) {
             board[character.coordinates[0]][character.coordinates[1]] = 0; 
             grainsLeft -= 1;
          }
+         break;
       case "Sub 1":
          executing = 1;
          break;

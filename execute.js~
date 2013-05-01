@@ -7,7 +7,7 @@ function execute(program) {
    if (executing == 0) step += 1;
    if (executing == 1) substep += 1;
    moveBugs();
-   backlight(localStep, "green", execute);
+   backlight(localStep, "green", executing);
 
    if (shocked > 0) {
       shocked -= 1;
