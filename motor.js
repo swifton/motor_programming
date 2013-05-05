@@ -26,6 +26,11 @@ function loadBoard(level) {
 
 function startProgram() {
    if (!gamePaused) return;
+   sp = document.getElementsByName("speed")
+   for (var i = 0; i<3; i++) {
+      if (sp[i].checked) break;
+   } 
+   speed = 1000/((2 + 1.5*i) * frames);
    frame = 0;
    var select;
    var option;
@@ -195,4 +200,5 @@ loadBoard(levels[levelNumber]);
 
 clear();
 draw();
+//drawimage(-100, -100, 'bug', 0)
 setTimeout(draw, 500)

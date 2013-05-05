@@ -64,6 +64,18 @@ function oldState() {
 	}
 }
 
+function drawGrid() {
+	p = width;
+	s = height;
+	for (i = 0; i <= width + s; i++) {
+		drawLine(i*diameter, 0, i*diameter, (height + p)*diameter);
+	}
+	for (i = 0; i <= height + p; i++) {
+		drawLine(0,i*diameter, (width + s)*diameter, i*diameter);
+	}
+}
+
+
 function backlight(step, color, execc) {
    if (execc == 0) prog = "program";
    if (execc == 1) prog = "sub1";
@@ -77,13 +89,14 @@ function backlight(step, color, execc) {
 
 function draw() {
    drawRectangle(0, 0, c.width, c.height);
-	rad = diameter/2;
-	for (i = 0; i < width; i++) {
-		for (j = 0; j < height; j++) {
-			if (board[i][j] == 1) drawimage(i*2*rad, j*2*rad, "apple", [0, 0]);
-			if (board[i][j] == 2)  drawimage(i*2*rad, j*2*rad, "wall", [0, 0]);
-		}
-	}
+   drawGrid();
+   rad = diameter/2;
+   for (i = 0; i < width; i++) {
+      for (j = 0; j < height; j++) {
+         if (board[i][j] == 1) drawimage(i*2*rad, j*2*rad, "apple", [0, 0]);
+         if (board[i][j] == 2)  drawimage(i*2*rad, j*2*rad, "wall", [0, 0]);
+      }
+   }
    for (i in bugs) {
       drawimage(bugs[i].drawPosition[0] * diameter, bugs[i].drawPosition[1] * diameter, "bug", bugs[i].drawAngle);
    }

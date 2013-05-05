@@ -27,23 +27,29 @@
 		</div>
 		<div class="buttons">	
 			<span id="button-one">
-				<a href="#" onclick="startProgram()" title="click me">Start</a>
+				<input type="button" onclick="startProgram()" value="Start">
 			</span>
 			<span id="button-one">
-				<a href="#" onclick="stopProgram(1000)" title="click me">Stop</a>
+				<input type="button" onclick="stopProgram()" value="Stop">
 			</span>
 			<span id="button-one">
-				<a href="#" onclick="nextLevel(0)" title="click me">Next Level</a>
+				<input type="button" onclick="nextLevel()" value="Next Level">
 			</span>
 			<span id="button-one">
-				<a href="#" onclick="previousLevel()" title="click me">Previous Level</a>
-			</span>
+				<input type="button" onclick="previousLevel()" value="Previous Level">
+			</span
 		</div>
 	</div>
 
-	<div id = "program">Program</div>	
-	<div id = "sub1">Subroutine</div>	
-
+	<div id="program">Program</div>	
+	<div id="sub1">Subroutine</div>	
+	
+	<div id="speed">
+		Speed<br>
+		<input type="radio" name="speed" value="slow">Slow<br>
+		<input type="radio" name="speed" value="medium" checked>Medium<br>
+		<input type="radio" name="speed" value="fast">Fast<br>
+	</div>
 
 	<script src="general.js"></script> 
 	<script src="collisions.js"></script> 
@@ -53,6 +59,10 @@
 	<script src="game.js"></script>  
 	<script src="levels.js"></script>  
 	<script src="motor.js"></script>  
+
+	<div id='comment'>
+		Input a program for the ladybird to collect all apples. You can select "Sub" to call the subroutine from the main program. Although, it's unnecessary until the 7th level.
+	</div> 
 
   </body>  
 </html>  
