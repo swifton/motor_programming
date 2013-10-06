@@ -4,7 +4,7 @@ Motor Programming
 ## Origins
 Motor programming is one of the mini puzzles included in [The Lost Mind of Dr. Brain](http://en.wikipedia.org/wiki/The_Lost_Mind_of_Dr._Brain) 
 video game originally published by Sierra Entertainment. This game is an HTML5 canvas remake of that mini puzzle. 
-Every mini puzzle in Dr. Brain has three levels of difficulty with 30 problems on each level. The playing field is 11x7. The remake contains 6 easy levels and 16 medium levels cropped to the most convenient size.
+Every mini puzzle in Dr. Brain has three levels of difficulty with 20 problems on each level. The playing field is 11x7. The remake contains 6 easy levels and 16 medium levels cropped to the most convenient size.
 
 ## How to play
 The ladybird is controlled by the program that a player inputs by choosing elementary commands like move one step forward, turn left or right. The objective is to collect all the apples on the playing field. The green ladybirds are bugs that screw up the program when encountered. Medium difficulty levels require programming subroutine in a similar way and calling it in the main program.
