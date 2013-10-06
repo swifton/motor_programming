@@ -10,7 +10,7 @@ Every mini puzzle in Dr. Brain has three levels of difficulty with 20 problems o
 The ladybird is controlled by the program that a player inputs by choosing elementary commands like move one step forward, turn left or right. The objective is to collect all the apples on the playing field. The green ladybirds are bugs that screw up the program when encountered. Medium difficulty levels require programming subroutine in a similar way and calling it in the main program.
 
 ## Structure
-* Motor.js is the main file and contains the code that runs the game.
+* Motor.js is the main file, it contains the code that runs the game.
 * Execute.js executes the program given by a player.
 * Bugs.js is the class whose instances are bugs and the player's character (the red ladybird).
 * Collisions.js are the functions that check whether the ladybird is about to bump into one of the bugs or a wall.
