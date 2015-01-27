@@ -8,6 +8,7 @@ function execute(program) {
    if (executing == 1) substep += 1;
    moveBugs();
    
+   // if the ladybird is shocked (encountered a bug) the current command's backlight is red
    if (shocked > 0) {
    backlight(localStep, "red", executing);
       shocked -= 1;
@@ -51,6 +52,7 @@ function execute(program) {
    }
 }
 
+// a function that rotates the ladybird
 function changeAngle() {
    character.angle = directionToAngle(character.direction);
    var an = character.oldAngle - character.angle;

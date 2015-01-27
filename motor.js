@@ -1,5 +1,6 @@
 var gLoop;
 
+// 
 function loadBoard(level) {
    width = level.width;
    height = level.height;

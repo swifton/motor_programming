@@ -1,3 +1,4 @@
+// both the bugs and the ladybird are instances of this class
 function creature(coordinates, direction) {
    this.coordinates = coordinates.slice(0);
    this.oldCoordinates = coordinates.slice(0);

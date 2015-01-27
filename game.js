@@ -1,3 +1,4 @@
+// accepts a 2d array and fills it with zeros
 function reset(data){
 	wid = data.length;
 	hei = data[0].length;

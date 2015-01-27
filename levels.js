@@ -1,3 +1,4 @@
+// instances of this class are annotations of the levels
 function level(grains, width, height, character, n) {
    this.character = character;
    this.width = width;
@@ -8,6 +9,8 @@ function level(grains, width, height, character, n) {
    this.bugs = new Array;
    this.nOfSubs = n;
 }
+
+// every paragraph here creates annotation for one level
 
 character = new creature([0, 2], [1, 0]);
 grains = [[2, 0]];
@@ -165,4 +168,5 @@ var level23 = new level(grains, 7, 5, character, 1);
 level23.walls = [[3, 0], [1, 1], [3, 1], [1, 2], [3, 3], [4, 3]];
 level23.bugs = []
 
+// all the levels are packed into an array
 levels = [level1, level2, level3, level4, level5, level6, level7, level8, level9, level10, level11, level12, level13, level14, level15, level16, level18, level19, level20, level21, level22, level23];

@@ -34,6 +34,7 @@ function drawimage(x, y, source, angle) {
 	ctx.restore();
 }
 	
+// fills the canvas with one color
 function clear() {
 	ctx.fillStyle = '#ffffff';
 	ctx.clearRect(0, 0, c.width, c.height);
@@ -43,6 +44,7 @@ function clear() {
 	ctx.fill();
 }
 
+// draws the ladybird and the bugs
 function drawPositions() {
    character.drawPosition[0] = (character.coordinates[0] * frame + character.oldCoordinates[0] * (frames - frame))/frames;
    character.drawPosition[1] = (character.coordinates[1] * frame + character.oldCoordinates[1] * (frames - frame))/frames;
@@ -55,6 +57,7 @@ function drawPositions() {
 	}
 }
 
+// saves the positions and the orientations of the ladybird and the bugs on this step before proceeding to the next one
 function oldState() {
    character.oldCoordinates = character.coordinates.slice(0);
    character.oldAngle = character.angle;
@@ -75,7 +78,7 @@ function drawGrid() {
 	}
 }
 
-
+// changes the backlight for the current command of the program
 function backlight(step, color, execc) {
    if (execc == 0) prog = "program";
    if (execc == 1) prog = "sub1";
@@ -87,6 +90,7 @@ function backlight(step, color, execc) {
    }
 }
 
+// the main drawing function; draws everything
 function draw() {
    drawRectangle(0, 0, c.width, c.height);
    drawGrid();
